@@ -4,17 +4,17 @@ BINARY TO HEX TO DECIMAL
 
 Task1: 5 mins answers:
 #PAGE 17 
-1. 000a:000c:0000:0000:0000:0000:0000:0000/64 =
+1. 000a:000c:0000:0000:0000:0000:0000:0000/64 = a:c::0:0:0:0
 	
-2. 0000:0000:0000:0000:0000:0000:0000:0000/0 = 
+2. 0000:0000:0000:0000:0000:0000:0000:0000/0 = ::::
 			
-3. fe80:0000:0000:0000:000a:0000:0000:000f/64 =
+3. fe80:0000:0000:0000:000a:0000:0000:000f/64 = fe80::0:000a:0:0:000f
 	
-4. 2002:6500:0000:3000:0000:0000:0000:0000/64 = 
+4. 2002:6500:0000:3000:0000:0000:0000:0000/64 = 2002:6500:0:3000::
 	
 5. 0000:0000:0000:0000:0000:0000:0000:0001/128 = 
 	
-6. ff00:0000:0000:beef:a00a:0aa0:0000:0000/8 = 
+6. ff00:0000:0000:beef:a00a:0aa0:0000:0000/8 = ff00::beef:a00a:0aa0:0:0
 
 
 Total additional assigned /48s: ~18 individual /48 blocks beyond the initial /32.
@@ -24,7 +24,7 @@ fec0:aabb:fafa:dada::/64 subnet to 22 offices/subnets:
 Con:  22 -> 5bits
 Add: /64 + /5 = /69
 iChamba:
-	8  4  2   1    8  4  2   1     8  4  2   1    8  4  2   1 
+	    8  4  2   1    8  4  2   1     8  4  2   1    8  4  2   1 
 1st     0  0  0   0    0   : 0000:
 2nd     0  0  0   0    1     :0800:
 3rd     0  0  0   1    0     :1000:
@@ -38,7 +38,7 @@ EX.2: SUBNET cafe:cafe:cafe:mm::/64 to 450 offices:
 C: 450 is 9bits
 A: /64+ /9 = /73
 iChamba:
-	8  4  2   1    8  4  2   1     8  4  2   1    8  4  2   1 
+	    8  4  2   1    8  4  2   1     8  4  2   1    8  4  2   1 
 1st     0  0  0   0    0  0  0   0     0  :0000:
 2nd     0  0  0   0    0  0  0   0     1  :0080:
 3rd     0  0  0   0    0  0  0   1     0  :0100:
@@ -296,6 +296,7 @@ Int Range fa0/10-12
  switchport trunk Encap Dot1Q
  switchport mode trunk
  switchport trunk allowed vlan 1-100
+ switchport trunk native vlan 1
  no shut
  do sh int trunk
 Dot1q = Qupid,mave switches love each other:
@@ -311,6 +312,7 @@ TAAS:/d1       32786 --> 24576
 Config t
 spanning-tree mode pvst
 spanning-tree vlan 1-100 root Primary
+!spanning-tree vlan 1-100 priority 24576
 do sh spanning-tree vlan 1
 BABA:/d2         32768->   28672
 Config t              
@@ -491,10 +493,10 @@ GLBP: global load balancing protocol: all Cisco Router
 Companies: 2 or 3 telcos:
 @TAAS/PLDTinternet:
 config t
-hostname PLDT-ITO
+hostname CORETAAS-PLDT
 Track 1 Int gi 0/1 line-protocol
 Int vlan 1
-standby 1 ip 10.__.1.6
+standby 1 ip 10.32.1.6
 standby 1 preempt
 standby 1 Priority 150
 standby 1 Track 1 decrement 60
@@ -510,9 +512,9 @@ standby 10 Track 1 decrement 60
 
 COREBABA/GLOBE:
 config t
-hostname GLOBE-ITO
+hostname COREBABA-GLOBE
 Int vlan 1
-standby 1 ip 10.__.1.6
+standby 1 ip 10.32.1.6
 standby 1 preempt
 standby 1 Priority 100
 end
@@ -728,6 +730,7 @@ how to get certified:
 2. Lab: NAT and DHCP:
 
 3. ask sa CHAT: "latest reivewer"
+
 
 
 
